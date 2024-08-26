@@ -1,0 +1,25 @@
+class Solution(object):
+    def longestSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        non_one = 0
+        l = 0
+        maxi = 0
+
+        for r in range(len(nums)):
+
+            if nums[r] == 0:
+                non_one +=1
+            
+            while non_one > 1:
+                if nums[l] == 0:
+                    non_one -=1
+                l+=1
+            
+            maxi = max(maxi,r-l)
+        
+        return maxi
+
+        
