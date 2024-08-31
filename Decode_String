@@ -1,0 +1,27 @@
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        
+        stack = []
+        currStr = ""
+        currNum = 0
+
+        for char in s:
+            if char.isdigit():
+                currNum = currNum*10 + int(char)
+            elif char == '[':
+                stack.append(currStr)
+                stack.append(currNum)
+                currStr = ""
+                currNum = 0
+            elif char  == ']':
+                num = stack.pop()
+                prevstr = stack.pop()
+                currStr = prevstr + num * currStr
+            else :
+                currStr+=char
+        
+        return currStr
