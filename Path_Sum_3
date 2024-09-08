@@ -1,0 +1,42 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def pathSum(self, root, targetSum):
+        """
+        :type root: TreeNode
+        :type targetSum: int
+        :rtype: int
+        """
+        def dfs(root,currentsum,prefixsum,count):
+
+            if not root:
+                return 
+            
+            currentsum+=root.val
+
+            if currentsum-targetSum in prefixsum:
+                count[0]+=prefixsum[currentsum-targetSum]
+            
+            if currentsum in prefixsum:
+                prefixsum[currentsum] +=1
+            else :
+                prefixsum[currentsum] = 1
+            
+            dfs(root.left,currentsum,prefixsum,count)
+            dfs(root.right,currentsum,prefixsum,count)
+
+            prefixsum[currentsum] -= 1
+        
+
+
+
+
+        count  = [0]
+        prefixsum = {0:1}
+        dfs(root,0,prefixsum,count)
+        return count[0]
+    
