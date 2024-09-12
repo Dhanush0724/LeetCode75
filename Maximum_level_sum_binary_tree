@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxLevelSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        from collections import defaultdict
+
+        levels = defaultdict(int)
+
+        def sum_vals(root,depth):
+
+            if root:
+                levels[depth]+= root.val
+                sum_vals(root.left,depth+1)
+                sum_vals(root.right,depth+1)
+        
+        sum_vals(root,1)
+
+        return max(levels,key=levels.get)
+
+
+        
