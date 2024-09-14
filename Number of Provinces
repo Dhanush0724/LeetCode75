@@ -1,0 +1,23 @@
+class Solution(object):
+    def findCircleNum(self, isConnected):
+        """
+        :type isConnected: List[List[int]]
+        :rtype: int
+        """
+        
+        def dfs(node):
+            visited[node] = 1
+            for i in range(len(isConnected)):
+                if isConnected[node][i] == 1 and not visited[i]:
+                    dfs(i)
+        
+        visited = [0]*len(isConnected)
+        count = 0
+
+        for i in range(len(isConnected)):
+            if not visited[i]:
+         
+                count +=1
+                dfs(i)
+        
+        return count
