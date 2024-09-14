@@ -1,0 +1,18 @@
+class Solution(object):
+    def canVisitAllRooms(self, rooms):
+        """
+        :type rooms: List[List[int]]
+        :rtype: bool
+        """
+        
+        def dfs(room):
+
+            visited[room] = True
+
+            for key in rooms[room]:
+                if not visited[key]:
+                    dfs(key)
+        visited = [False]*len(rooms)
+        dfs(0)
+
+        return all(visited)
