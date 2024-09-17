@@ -1,0 +1,32 @@
+class Solution(object):
+    def nearestExit(self, maze, entrance):
+        """
+        :type maze: List[List[str]]
+        :type entrance: List[int]
+        :rtype: int
+        """
+        from collections import deque
+        n = len(maze)
+        m = len(maze[0])
+       
+        directions = [(1,0),(0,1),(-1,0),(0,-1)]
+
+        q = deque([(entrance[0],entrance[1],0)])
+        visited = [[False for _ in range(m)] for _ in range(n)]
+        visited[entrance[0]][entrance[1]] = True
+        
+        while q:
+
+            r,c,step = q.popleft()
+
+            for dr,dc in directions:
+                nr,nc = r+dr,c+dc
+            
+                if 0<=nr<n and 0<=nc<m and maze[nr][nc] == '.' and not visited[nr][nc] :
+                    if (nr == 0 or nr == n - 1 or nc == 0 or nc == m - 1) and (nr != entrance[0] or nc != entrance[1]):
+                        return step + 1
+                    
+                    visited[nr][nc] = True
+                    q.append((nr,nc,step+1))
+                
+        return -1
