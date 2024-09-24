@@ -1,0 +1,35 @@
+class Solution(object):
+    def successfulPairs(self, spells, potions, success):
+        """
+        :type spells: List[int]
+        :type potions: List[int]
+        :type success: int
+        :rtype: List[int]
+        """
+        # potions.sort()
+        # res = []
+        # for s in spells:
+        #     pairs =  0
+        #     for p in potions:
+        #         if s*p >= success:
+        #             pairs+=1
+        #     res.append(pairs)
+        # return res
+        res = []
+        potions.sort()
+        n = len(potions)
+        for s in spells:
+            left = 0
+            right = n-1
+            while left<=right:
+                mid = left+(right-left)//2
+                if s*potions[mid] >= success:
+                    right = mid -1
+                else :
+                    left = mid+1
+            pairs = n - left
+            res.append(pairs)
+        return res
+                
+
+        
