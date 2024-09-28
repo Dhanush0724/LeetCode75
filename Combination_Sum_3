@@ -1,0 +1,20 @@
+class Solution(object):
+    def combinationSum3(self, k, n):
+        
+        def backtrack(start,combination,sum):
+
+            if len(combination) == k and sum == n:
+                result.append(combination[:])
+            
+            if len(combination) > k or sum > n:
+                return
+
+            for i in range(start,10):
+                combination.append(i)
+                backtrack(i+1,combination,sum+i)
+                combination.pop()
+        result = []
+        backtrack(1,[],0)
+        return result
+
+        
