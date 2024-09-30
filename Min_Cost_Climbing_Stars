@@ -1,0 +1,71 @@
+class Solution(object):
+    def minCostClimbingStairs(self, cost):
+        """
+        :type cost: List[int]
+        :rtype: int
+        """
+        # def f(ind):
+        #     if ind>=len(cost):
+        #         return 0
+
+        #     step1 = cost[ind] + f(ind+1)
+        #     step2 = cost[ind] + f(ind+2)
+
+        #     return min(step1,step2)        
+
+        # return min(f(0),f(1))
+
+        # def f(ind,dp):
+
+        #     if ind>=len(cost):
+        #         return 0
+            
+        #     if dp[ind]!=-1:
+        #         return dp[ind]
+            
+        #     step1 = cost[ind] + f(ind+1,dp)
+        #     step2 = cost[ind] + f(ind+2,dp)
+
+        #     dp[ind] =  min(step1,step2)
+
+        #     return dp[ind]
+        
+        # dp = [-1]*len(cost)
+        
+        # return min(f(0,dp) ,f(1,dp))
+
+        # n = len(cost)
+        # if n==0:
+        #     return 0
+        # if n == 1:
+        #     return cost[0]
+        
+        # dp = [0]*n
+
+        # dp[0] = cost[0]
+        # dp[1] = cost[1]
+
+        # for i in range(2,n):
+
+        #     dp[i] = cost[i] + min(dp[i-1],dp[i-2])
+        
+        # return min(dp[n-1],dp[n-2])
+
+        n  = len(cost)
+
+        if n == 0:
+            return 0
+        elif n == 1:
+            return cost[0]
+        
+        prev2 = cost[0]
+        prev1 = cost[1]
+
+        for i in range(2,n):
+
+            current = cost[i] + min(prev2,prev1)
+
+            prev2 = prev1
+            prev1 = current
+        
+        return min(prev2,prev1)
